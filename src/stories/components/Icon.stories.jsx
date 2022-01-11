@@ -8,9 +8,9 @@ export default {
 export const Default = () => {
   return (
     <>
-      <Icon name="mi:notification" color="#000" height={18} />
-      <Icon name="mi:search" color="#000" height={18} />
-      <Icon name="mi:menu" color="#000" height={18} />
+      <Icon name="mi:notification" color="#000" height="18px" />
+      <Icon name="mi:search" color="#000" height="18px" />
+      <Icon name="mi:menu" color="#000" height="18px" />
     </>
   );
 };

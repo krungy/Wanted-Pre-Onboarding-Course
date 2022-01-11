@@ -21,7 +21,7 @@ const Subtitle = styled.h3`
   line-height: 1.64;
 `;
 
-const Information = ({ title, subtitle, src, ...props }) => {
+const Information = ({ title, subtitle, ...props }) => {
   return (
     <InformationContainer style={{ ...props.style }}>
       <Title>{title}</Title>
@@ -41,11 +41,6 @@ const Information = ({ title, subtitle, src, ...props }) => {
 Information.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string.isRequired,
-  src: PropTypes.string,
-};
-
-Information.defaultProps = {
-  src: '#',
 };
 
 export default Information;

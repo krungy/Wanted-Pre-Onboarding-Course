@@ -9,12 +9,12 @@ const IconComponent = ({ name, color, height, ...props }) => {
 IconComponent.propTypes = {
   name: PropTypes.string.isRequired,
   color: PropTypes.string,
-  height: PropTypes.number,
+  height: PropTypes.string,
 };
 
 IconComponent.defaultProps = {
   color: `${color.black}`,
-  height: 18,
+  height: '18px',
 };
 
 export default IconComponent;
