@@ -15,25 +15,26 @@ const AvatarContainer = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  width: 90%;
-  height: 90%;
+  position: absolute;
+  width: ${({ innerSize }) => `${innerSize}px`};
+  height: ${({ innerSize }) => `${innerSize}px`};
   border-radius: 50%;
   overflow: hidden;
 `;
 
 const Avatar = ({ size, src, ...props }) => {
   const avatarSrc = src === 'default' ? profileDefault : src;
+  const innerSize = size - 4;
 
   const imageStyle = {
     width: '100%',
     height: '100%',
-    objectFit: 'cover', // cover, none, contain
-    // display: block,
+    objectFit: 'cover',
   };
 
   return (
     <AvatarContainer {...props} size={size}>
-      <ImageContainer>
+      <ImageContainer innerSize={innerSize}>
         <img
           alt="avatar"
           src={avatarSrc}
