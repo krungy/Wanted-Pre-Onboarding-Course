@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import color from '@assets/colors';
-import { TextAnchorButton, Icon } from '@components/base';
+import { TextButton, Icon } from '@components/base';
 import PropTypes from 'prop-types';
 
 const InformationContainer = styled.div`
@@ -27,14 +27,13 @@ const Information = ({ title, subtitle, src, ...props }) => {
       <Title>{title}</Title>
       <Subtitle>{subtitle}</Subtitle>
       <hr color={color.grey} />
-      <TextAnchorButton
+      <TextButton
         border={false}
         color={color.blue}
-        src={src}
-        style={{ padding: '6px 8px', margin: '0px 20px' }}
+        style={{ padding: '6px 8px', marginLeft: '20px' }}
       >
         바로가기 <Icon name="bi:chevron-right" color={color.blue} height={16} />
-      </TextAnchorButton>
+      </TextButton>
     </InformationContainer>
   );
 };

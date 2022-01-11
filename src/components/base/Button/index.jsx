@@ -28,7 +28,7 @@ Button.propTypes = {
 
 export default Button;
 
-const AnchorContainer = styled.a`
+const TextContainer = styled.span`
   display: flex;
   text-decoration: none;
   color: ${({ color }) => color};
@@ -38,33 +38,25 @@ const AnchorContainer = styled.a`
   line-height: ${({ border }) => (border ? '30px' : `20px`)};
 `;
 
-export const TextAnchorButton = ({
-  children,
-  border,
-  color,
-  src,
-  ...props
-}) => {
+export const TextButton = ({ children, border, color, ...props }) => {
   const isBordered = border ? true : false;
 
   return (
     <ButtonContainer type="button">
-      <AnchorContainer href={src} border={isBordered} color={color} {...props}>
+      <TextContainer border={isBordered} color={color} {...props}>
         {children}
-      </AnchorContainer>
+      </TextContainer>
     </ButtonContainer>
   );
 };
 
-TextAnchorButton.propTypes = {
+TextButton.propTypes = {
   children: PropTypes.node.isRequired,
   border: PropTypes.bool,
-  src: PropTypes.string,
   color: PropTypes.string,
 };
 
-TextAnchorButton.defaultProps = {
+TextButton.defaultProps = {
   border: false,
-  src: '#',
   color: color.black,
 };
