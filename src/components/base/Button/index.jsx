@@ -48,8 +48,8 @@ export const TextAnchorButton = ({
   const isBordered = border ? true : false;
 
   return (
-    <ButtonContainer type="button" {...props}>
-      <AnchorContainer href={src} border={isBordered} color={color}>
+    <ButtonContainer type="button">
+      <AnchorContainer href={src} border={isBordered} color={color} {...props}>
         {children}
       </AnchorContainer>
     </ButtonContainer>
