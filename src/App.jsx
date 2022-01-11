@@ -1,6 +1,7 @@
 import React from 'react';
 import { Global } from '@emotion/core';
 import ResetStyle from '@styles/ResetStyle';
+
 const App = () => {
   return (
     <>
