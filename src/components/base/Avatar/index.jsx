@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import profileDefault from '@assets/Image/profile_default.png';
+import color from '@assets/colors';
 
 const AvatarContainer = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ const AvatarContainer = styled.div`
   align-items: center;
   width: ${({ size }) => `${size}px`};
   height: ${({ size }) => `${size}px`};
-  border: 1px solid #e1e2e3;
+  border: 1px solid ${color.grey};
   border-radius: 50%;
   box-sizing: border-box;
 `;
