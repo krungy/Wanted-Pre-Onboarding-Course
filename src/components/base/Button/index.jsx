@@ -29,20 +29,27 @@ Button.propTypes = {
 export default Button;
 
 const AnchorContainer = styled.a`
-  color: ${({ border }) => (border ? `${color.black_50}` : `${color.black}`)};
+  display: flex;
   text-decoration: none;
+  color: ${({ color }) => color};
   padding: ${({ border }) => (border ? `0 10px 0 10px` : '24px')};
   border: ${({ border }) => (border ? '1px solid #e1e2e3' : `none`)};
   border-radius: ${({ border }) => (border ? '15px' : `none`)};
   line-height: ${({ border }) => (border ? '30px' : `20px`)};
 `;
 
-export const TextAnchorButton = ({ children, border, src, ...props }) => {
+export const TextAnchorButton = ({
+  children,
+  border,
+  color,
+  src,
+  ...props
+}) => {
   const isBordered = border ? true : false;
 
   return (
     <ButtonContainer type="button" {...props}>
-      <AnchorContainer href={src} border={isBordered}>
+      <AnchorContainer href={src} border={isBordered} color={color}>
         {children}
       </AnchorContainer>
     </ButtonContainer>
@@ -53,9 +60,11 @@ TextAnchorButton.propTypes = {
   children: PropTypes.node.isRequired,
   border: PropTypes.bool,
   src: PropTypes.string,
+  color: PropTypes.string,
 };
 
 TextAnchorButton.defaultProps = {
   border: false,
   src: '#',
+  color: color.black,
 };
