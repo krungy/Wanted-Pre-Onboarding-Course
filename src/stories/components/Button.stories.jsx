@@ -18,13 +18,13 @@ export const Default = () => {
     <Container>
       <Button>Test</Button>
       <Button>
-        <Icon name="mi:menu" color="#000" height="18" />
+        <Icon name="mi:menu" color="#000" height={18} />
       </Button>
       <Button>
-        <Icon name="mi:search" color="#000" height="18" />
+        <Icon name="mi:search" color="#000" height={18} />
       </Button>
       <Button>
-        <Icon name="mi:notification" color="#000" height="18" />
+        <Icon name="mi:notification" color="#000" height={18} />
       </Button>
       <Button>
         <Avatar src="default" />
@@ -36,7 +36,7 @@ export const Default = () => {
         Test
       </TextAnchorButton>
       <TextAnchorButton border={false} color={color.blue} src="#">
-        바로가기 <Icon name="bi:chevron-right" color={color.blue} height="18" />
+        바로가기 <Icon name="bi:chevron-right" color={color.blue} height={18} />
       </TextAnchorButton>
     </Container>
   );
