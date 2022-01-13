@@ -21,7 +21,7 @@ const ButtonContainer = styled.button`
 `;
 
 const NotificationStringButton = styled(ButtonContainer)`
-  &:after {
+  &::after {
     content: attr(data-name);
     color: ${color.blue};
     position: absolute;
@@ -32,7 +32,7 @@ const NotificationStringButton = styled(ButtonContainer)`
 `;
 
 const NotificationSvgButton = styled(ButtonContainer)`
-  &:after {
+  &::after {
     display: inline-flex;
 
     content: '';
@@ -54,7 +54,6 @@ const Button = ({ children, status, ...props }) => {
 
   const handleStatus = status !== 'Default' ? stateList[status] : '';
 
-  console.log(handleStatus);
   return (
     <NotificationSvgButton type="button" state={handleStatus} {...props}>
       {children}
