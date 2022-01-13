@@ -1,2 +1,5 @@
-export { default as DefaultHeader, MainHeader } from './Header';
+export {
+  default as DefaultNavigation,
+  GlobalNavigationBar,
+} from './Navigation';
 export { default as CarouselContent } from './CarouselContent';

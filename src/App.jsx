@@ -1,13 +1,13 @@
 import React from 'react';
 import { Global } from '@emotion/core';
 import ResetStyle from '@styles/ResetStyle';
-import { MainHeader } from '@components/domain';
+import { GlobalNavigationBar } from '@components/domain';
 
 const App = () => {
   return (
     <>
       <Global styles={ResetStyle} />
-      <MainHeader />
+      <GlobalNavigationBar />
     </>
   );
 };

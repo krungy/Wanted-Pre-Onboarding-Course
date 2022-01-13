@@ -4,7 +4,7 @@ import color from '@assets/colors';
 import { Icon, Image, TextButton, Button, Avatar } from '@components/base';
 import Logo from '@assets/Image/Logo.png';
 
-const HeaderContainer = styled.header`
+const NavigationContainer = styled.header`
   display: flex;
   position: fixed;
   z-index: 5;
@@ -21,7 +21,7 @@ const HeaderContainer = styled.header`
   border-bottom: 1px solid ${color.grey};
 `;
 
-const HeaderContent = styled.div`
+const NavigationContent = styled.div`
   display: flex;
   flex: 1;
   width: 100%;
@@ -42,22 +42,22 @@ const Divider = styled.hr`
   vertical-align: middle;
 `;
 
-const DefaultHeader = ({
+const DefaultNavigation = ({
   leftComponent,
   centerComponent,
   rightComponent,
   ...props
 }) => {
   return (
-    <HeaderContainer {...props}>
-      <HeaderContent align="left">{leftComponent}</HeaderContent>
-      <HeaderContent align="center">{centerComponent}</HeaderContent>
-      <HeaderContent align="flex-end">{rightComponent}</HeaderContent>
-    </HeaderContainer>
+    <NavigationContainer {...props}>
+      <NavigationContent align="left">{leftComponent}</NavigationContent>
+      <NavigationContent align="center">{centerComponent}</NavigationContent>
+      <NavigationContent align="flex-end">{rightComponent}</NavigationContent>
+    </NavigationContainer>
   );
 };
 
-export default DefaultHeader;
+export default DefaultNavigation;
 
 const MenuContainer = styled.div`
   display: flex;
@@ -66,7 +66,7 @@ const MenuContainer = styled.div`
   gap: 8px;
 `;
 
-export const MainHeader = () => {
+export const GlobalNavigationBar = () => {
   const menuList = [
     {
       title: '채용',
@@ -141,7 +141,7 @@ export const MainHeader = () => {
       ),
     );
   return (
-    <DefaultHeader
+    <DefaultNavigation
       leftComponent={
         <MenuContainer>
           <Button>
