@@ -1,0 +1,14 @@
+export { default as Career } from './career.jpg';
+export { default as Data } from './data.jpg';
+export { default as Github } from './github.jpg';
+export { default as Guide } from './guide.jpg';
+export { default as Knowhow } from './knowhow.jpg';
+export { default as Law } from './law.jpg';
+export { default as Marketer } from './marketer.jpg';
+export { default as Md } from './md.jpg';
+export { default as Onboarding } from './onboarding.jpg';
+export { default as Starbucks } from './starbucks.jpg';
+export { default as Ux } from './ux.jpg';
+export { default as Logo } from './Logo.png';
+export { default as ProfileDefault } from './profile_default.png';
+export { default as New } from './New.svg';

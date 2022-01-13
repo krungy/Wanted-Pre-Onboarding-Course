@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import color from '@assets/colors';
-import New from '@assets/Image/New.svg';
+import { New } from '@assets/Image';
 
 const ButtonContainer = styled.button`
   display: inline-flex;

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import color from '@assets/colors';
 import { Icon, Image, TextButton, Button, Avatar } from '@components/base';
-import Logo from '@assets/Image/Logo.png';
+import { Logo } from '@assets/Image';
 
 const NavigationContainer = styled.header`
   display: flex;

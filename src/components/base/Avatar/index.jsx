@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import profileDefault from '@assets/Image/profile_default.png';
+import { ProfileDefault } from '@assets/Image';
 import color from '@assets/colors';
 
 const AvatarContainer = styled.div`
@@ -24,7 +24,7 @@ const ImageContainer = styled.div`
 `;
 
 const Avatar = ({ size, src, ...props }) => {
-  const avatarSrc = src === 'default' ? profileDefault : src;
+  const avatarSrc = src === 'default' ? ProfileDefault : src;
   const innerSize = size - 4;
 
   const imageStyle = {
