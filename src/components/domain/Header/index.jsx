@@ -1,6 +1,6 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import color from '@assets/colors';
-// import PropTypes from 'prop-types';
 import { Icon, Image, TextButton, Button, Avatar } from '@components/base';
 import Logo from '@assets/Image/Logo.png';
 
@@ -130,7 +130,7 @@ export const MainHeader = () => {
           <Icon name={name} color={color.black} height="18px" />
         </Button>
       ) : (
-        <Button>
+        <Button key={index}>
           <Avatar src="default"></Avatar>
         </Button>
       ),
@@ -162,7 +162,3 @@ export const MainHeader = () => {
     />
   );
 };
-
-MainHeader.propTypes = {};
-
-MainHeader.defaultProps = {};
