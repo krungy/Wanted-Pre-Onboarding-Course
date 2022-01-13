@@ -107,7 +107,7 @@ export const MainHeader = () => {
     {
       name: 'mi:notification',
       type: 'Icon',
-      status: 'Default',
+      status: 'New',
     },
     {
       name: 'avatar',
@@ -118,7 +118,12 @@ export const MainHeader = () => {
 
   const handleMenuList = (list) =>
     list.map(({ title, status }, index) => (
-      <TextButton border={false} color={color.black} key={index}>
+      <TextButton
+        border={false}
+        color={color.black}
+        status={status}
+        key={index}
+      >
         {title}
       </TextButton>
     ));
@@ -126,11 +131,11 @@ export const MainHeader = () => {
   const handleSideMenuList = (list) =>
     list.map(({ name, type, status }, index) =>
       type === 'Icon' ? (
-        <Button key={index}>
+        <Button status={status} key={index} style={{ height: 32 }}>
           <Icon name={name} color={color.black} height="18px" />
         </Button>
       ) : (
-        <Button key={index}>
+        <Button status={status} key={index} style={{ height: 32 }}>
           <Avatar src="default"></Avatar>
         </Button>
       ),
