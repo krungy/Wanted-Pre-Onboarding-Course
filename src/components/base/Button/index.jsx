@@ -6,12 +6,14 @@ const ButtonContainer = styled.button`
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  width: auto;
   margin: 0;
   padding: 0;
   border: 0;
   background: none;
   color: ${color.black};
   cursor: pointer;
+  white-space: nowrap;
 `;
 
 const Button = ({ children, ...props }) => {
@@ -32,7 +34,7 @@ const TextContainer = styled.span`
   display: flex;
   text-decoration: none;
   color: ${({ color }) => color};
-  padding: ${({ border }) => (border ? `0 10px 0 10px` : '24px')};
+  padding: ${({ border }) => (border ? `0 10px 0 10px` : '15px')};
   border: ${({ border }) => (border ? '1px solid #e1e2e3' : `none`)};
   border-radius: ${({ border }) => (border ? '15px' : `none`)};
   line-height: ${({ border }) => (border ? '30px' : `20px`)};
