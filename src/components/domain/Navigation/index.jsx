@@ -6,7 +6,6 @@ import { Logo } from '@assets/Image';
 
 const NavigationContainer = styled.header`
   display: flex;
-  position: fixed;
   z-index: 5;
   top: 0;
   left: 0;
@@ -136,7 +135,7 @@ export const GlobalNavigationBar = () => {
         </Button>
       ) : (
         <Button status={status} key={index} style={{ height: 32 }}>
-          <Avatar src="default"></Avatar>
+          <Avatar src="https://picsum.photos/300/300"></Avatar>
         </Button>
       ),
     );
