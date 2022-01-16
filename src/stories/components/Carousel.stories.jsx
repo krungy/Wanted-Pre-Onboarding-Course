@@ -6,5 +6,5 @@ export default {
 };
 
 export const Default = () => {
-  return <Carousel />;
+  return <Carousel carouselGap={20} imageWidth={1060} />;
 };

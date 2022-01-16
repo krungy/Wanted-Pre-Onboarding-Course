@@ -8,7 +8,7 @@ const App = () => {
     <>
       <Global styles={ResetStyle} />
       <GlobalNavigationBar />
-      <Carousel />
+      <Carousel carouselGap={20} imageWidth={1060} style={{ marginTop: 16 }} />
     </>
   );
 };
