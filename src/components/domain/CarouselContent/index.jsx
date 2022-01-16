@@ -11,13 +11,14 @@ const CarouselContentContainer = styled.div`
   border-radius: 4px;
   overflow: hidden;
   &::after {
+    display: ${({ isActive }) => (isActive ? 'none' : 'block')};
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     content: '';
-    background: ${({ isActive }) => !isActive && `rgba(0, 0, 0, 0.3)`};
+    background: rgba(0, 0, 0, 0.4);
   }
   > div {
     display: ${({ isActive }) => (isActive ? 'block' : 'none')};
@@ -38,7 +39,13 @@ const CarouselContent = ({
 }) => {
   return (
     <CarouselContentContainer width={width} isActive={isActive} {...props}>
-      <Image src={src} alt={alt} width="100%" height="100%" />
+      <Image
+        src={src}
+        alt={alt}
+        width="100%"
+        height="100%"
+        style={{ cursor: 'pointer' }}
+      />
       <Information title={title} subtitle={subtitle}></Information>
     </CarouselContentContainer>
   );
