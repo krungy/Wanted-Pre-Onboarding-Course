@@ -16,8 +16,8 @@ const ButtonContainer = styled.button`
   border: 0;
   background: none;
   color: ${color.black};
-  cursor: pointer;
   white-space: nowrap;
+  cursor: pointer;
 `;
 
 const NotificationStringButton = styled(ButtonContainer)`
@@ -34,7 +34,6 @@ const NotificationStringButton = styled(ButtonContainer)`
 const NotificationSvgButton = styled(ButtonContainer)`
   &::after {
     display: inline-flex;
-
     content: '';
     background-image: url(${({ state }) => state});
     background-size: 100%;
