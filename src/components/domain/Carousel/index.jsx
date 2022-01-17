@@ -16,7 +16,7 @@ import { CarouselContent } from '@components/domain';
 import styled from '@emotion/styled';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import color from '@assets/colors';
-import useResize from '@hooks/useResize';
+import { useResize, useIntervalFn } from '@hooks';
 import PropTypes from 'prop-types';
 
 const CAROUSEL_LIST = [
@@ -177,9 +177,14 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
         setActiveContent(totalContent - 2));
   };
 
+  const [run] = useIntervalFn(() => {
+    handleNextContent();
+  }, 4000);
+
   useEffect(() => {
     moveCarousel(300);
-  }, [moveCarousel]);
+    run();
+  }, [moveCarousel, run]);
 
   const handleCarouselList = (list) =>
     list.map(({ src, alt, title, subtitle }, index) => (
