@@ -7,8 +7,8 @@ const App = () => {
   return (
     <>
       <Global styles={ResetStyle} />
-      <GlobalNavigationBar />
-      <Carousel carouselGap={20} imageWidth={1060} style={{ marginTop: 16 }} />
+      <GlobalNavigationBar width={1060} />
+      <Carousel carouselGap={20} imageWidth={1060} style={{ marginTop: 25 }} />
     </>
   );
 };
