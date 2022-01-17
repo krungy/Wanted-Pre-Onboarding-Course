@@ -11,9 +11,11 @@ import {
   Starbucks,
   Ux,
 } from '@assets/Image';
+import { Button, Icon } from '@components/base';
 import { CarouselContent } from '@components/domain';
 import styled from '@emotion/styled';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import color from '@assets/colors';
 import useResize from '@hooks/useResize';
 import PropTypes from 'prop-types';
 
@@ -93,6 +95,7 @@ const CarouselContainer = styled.div`
   width: 100%;
   padding: 0;
   overflow: hidden;
+  position: relative;
 `;
 
 const ContentContainer = styled.div`
@@ -103,10 +106,25 @@ const ContentContainer = styled.div`
   gap: ${({ gap }) => gap}px;
 `;
 
+const ButtonContainer = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  top: 120px;
+  border-radius: 15px;
+  background-color: ${color.white};
+  opacity: 0.5;
+  width: 30px;
+  height: 60px;
+`;
+
 const Carousel = ({ carouselGap, imageWidth, ...props }) => {
   const [activeContent, setActiveContent] = useState(1);
   const initialLocation = imageWidth + carouselGap;
   const [currentLocation, setCurrentLocation] = useState(initialLocation);
+  const [isLoading, setIsLoading] = useState(false);
   // const [cursorPointX, setCursorPointX] = useState(null);
   // const [isDrag, setIsDrag] = useState(false);
 
@@ -126,7 +144,19 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
     [currentLocation],
   );
 
+  const handleLoading = () => {
+    setIsLoading(true);
+    let timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 700);
+    return () => {
+      clearTimeout(timer);
+    };
+  };
+
   const handleNextContent = () => {
+    if (isLoading) return;
+    handleLoading();
     return activeContent >= totalContent - 2
       ? (setCurrentLocation(initialLocation), setActiveContent(1))
       : (setCurrentLocation(
@@ -136,6 +166,8 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
   };
 
   const handlePrevContent = () => {
+    if (isLoading) return;
+    handleLoading();
     return activeContent > 1
       ? (setCurrentLocation(
           (prevLocation) => (prevLocation -= imageWidth + carouselGap),
@@ -177,8 +209,16 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
       >
         {handleCarouselList(CAROUSEL_LIST)}
       </ContentContainer>
-      <button onClick={handlePrevContent}>prev</button>
-      <button onClick={handleNextContent}>next</button>
+      <ButtonContainer style={{ left: `calc((100% - 1210px) / 2)` }}>
+        <Button onClick={handlePrevContent}>
+          <Icon name="bi:chevron-left" height={16} />
+        </Button>
+      </ButtonContainer>
+      <ButtonContainer style={{ right: `calc((100% - 1210px) / 2)` }}>
+        <Button onClick={handleNextContent}>
+          <Icon name="bi:chevron-right" height={16} />
+        </Button>
+      </ButtonContainer>
     </CarouselContainer>
   );
 };
