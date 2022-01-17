@@ -79,6 +79,7 @@ const TextContainer = styled.span`
   border: ${({ border }) => (border ? '1px solid #e1e2e3' : `none`)};
   border-radius: ${({ border }) => (border ? '15px' : `none`)};
   line-height: ${({ border }) => (border ? '30px' : `20px`)};
+  align-items: center;
 `;
 
 export const TextButton = ({ children, border, color, status, ...props }) => {
