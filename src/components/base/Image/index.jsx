@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 const ImageContainer = styled.img`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
+  user-select: none;
 `;
 
 const Image = ({ src, alt, width, height, ...props }) => {
@@ -13,6 +14,10 @@ const Image = ({ src, alt, width, height, ...props }) => {
       src={src}
       width={width}
       height={height}
+      onDragStart={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+      }}
       {...props}
     />
   );
