@@ -251,8 +251,8 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
 
   const handleTouchEnd = useCallback(() => {
     setIsDrag(false);
-    if (touchStart - touchEnd > imageWidth / 4) handleNextContent();
-    if (touchStart - touchEnd < -(imageWidth / 4)) handlePrevContent();
+    if (touchStart - touchEnd > imageWidth / 5) handleNextContent();
+    if (touchStart - touchEnd < -(imageWidth / 5)) handlePrevContent();
 
     setTouchStart(null);
     setTouchEnd(null);
