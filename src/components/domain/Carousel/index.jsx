@@ -233,12 +233,12 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
         {handleCarouselList(CAROUSEL_LIST)}
       </ContentContainer>
       <ButtonContainer align="left">
-        <Button onClick={handlePrevContent}>
+        <Button onClick={handlePrevContent} style={{ height: '100%' }}>
           <Icon name="bi:chevron-left" height={16} />
         </Button>
       </ButtonContainer>
       <ButtonContainer align="right">
-        <Button onClick={handleNextContent}>
+        <Button onClick={handleNextContent} style={{ height: '100%' }}>
           <Icon name="bi:chevron-right" height={16} />
         </Button>
       </ButtonContainer>
