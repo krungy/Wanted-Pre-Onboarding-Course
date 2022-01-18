@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+// window 너비 감지 hook
 const useResize = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 

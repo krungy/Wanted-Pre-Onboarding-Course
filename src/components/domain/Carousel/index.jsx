@@ -89,6 +89,7 @@ const CAROUSEL_LIST = [
   },
 ];
 
+// 맨앞, 맨뒤에 실제로는 이동하지 않는 컨텐츠를 하나씩 넣어서 레이아웃이 유지되도록 함
 CAROUSEL_LIST.unshift(CAROUSEL_LIST[CAROUSEL_LIST.length - 1]);
 CAROUSEL_LIST.push(CAROUSEL_LIST[1]);
 
@@ -131,6 +132,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Carousel = ({ carouselGap, imageWidth, ...props }) => {
+  // activeContent '0' 과 마지막 컨텐츠는 옆에 살짝 보여주기만 하는 레이아웃 용도
   const [activeContent, setActiveContent] = useState(1);
   const initialLocation = imageWidth + carouselGap;
   const [currentLocation, setCurrentLocation] = useState(initialLocation);
@@ -139,8 +141,10 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
   const windowWidth = useResize();
   const totalContent = CAROUSEL_LIST.length;
 
+  // Carousel 컨텐츠영역의 전체 넓이
   const fullWidth =
     imageWidth * totalContent + (totalContent - 1) * carouselGap;
+  // Carousel 표시해줄 마지막 컨텐츠의 시작 넓이 (prev 이벤트로의 이동을 위함)
   const lastContentWidth =
     imageWidth * (totalContent - 2) + (totalContent - 2) * carouselGap;
 
@@ -152,6 +156,7 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
     [currentLocation],
   );
 
+  // 이벤트 딜레이 시간
   const handleLoading = () => {
     setIsLoading(true);
     let timer = setTimeout(() => {
@@ -208,7 +213,7 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
     run();
   }, [moveCarousel, run]);
 
-  // 반응형에 따른 캐러셀 컨텐츠 위치 작업
+  // window 크기의 변화가 일어날 떄 캐러셀 컨텐츠 위치 작업
   useEffect(() => {
     if (imageWidth < 1060) {
       setActiveContent(1);
