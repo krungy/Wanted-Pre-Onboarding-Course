@@ -102,8 +102,12 @@ const NavigationContent = styled.div`
   align-items: center;
   box-sizing: border-box;
   // 기본 상태에서는 three-dot 아이콘 숨기기
-  > div :nth-child(4) {
+  > div :nth-of-type(4) {
     display: none;
+  }
+
+  ${theme.mediaQuery('large')} {
+    padding: ${({ align }) => (align === 'left' ? '0 0 0 4px' : '0 20px')};
   }
 
   ${theme.mediaQuery('medium')} {
@@ -116,11 +120,11 @@ const NavigationContent = styled.div`
         gap: '4px';
         // Divider, Avatar, Button 숨기고 three-dot 컴포넌트 보여주기
         > hr,
-        > div :nth-child(3),
+        > div :nth-of-type(3),
         > button {
           display: none;
         }
-        > div :nth-child(4) {
+        > div :nth-of-type(4) {
           display: block;
         }
       `}
@@ -206,7 +210,7 @@ export const GlobalNavigationBar = () => {
     list.map(({ name, type, status }, index) =>
       type === 'Icon' ? (
         <Button status={status} key={index} style={{ height: 32 }}>
-          <Icon name={name} color={color.black} height="18px" />
+          <Icon name={name} color={color.black} height={18} />
         </Button>
       ) : (
         <Button status={status} key={index} style={{ height: 32 }}>
@@ -236,7 +240,7 @@ export const GlobalNavigationBar = () => {
         leftComponent={
           <MenuContainer style={{ gap: 0 }}>
             <Button>
-              <Icon name="mi:menu" color="#000" height="24px" />
+              <Icon name="mi:menu" color="#000" height={24} />
             </Button>
             <Button>
               <Image

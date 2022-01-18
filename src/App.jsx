@@ -12,8 +12,6 @@ const App = () => {
     return windowWidth <= theme.breakPoints.large ? windowWidth : 1060;
   };
 
-  console.log(ImageWidth());
-
   return (
     <>
       <Global styles={ResetStyle} />
