@@ -5,7 +5,7 @@ const breakPoints = {
 };
 
 const mediaQuery = (breakpoint, minOrMax = 'max') => {
-  return `@media (${minOrMax}-width: ${breakPoints[breakpoint]})`;
+  return `@media (${minOrMax}-width: ${breakPoints[breakpoint]}px)`;
 };
 
 const theme = { breakPoints, mediaQuery };
