@@ -35,6 +35,8 @@ const NotificationSvgButton = styled(ButtonContainer)`
   &::after {
     display: inline-flex;
     content: '';
+    width: 12px;
+    height: 12px;
     background-image: url(${({ state }) => state});
     background-size: 100%;
     background-repeat: no-repeat;
