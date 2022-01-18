@@ -105,6 +105,7 @@ const ContentContainer = styled.div`
   box-sizing: border-box;
   width: ${({ width }) => width}px;
   gap: ${({ gap }) => gap}px;
+  user-select: none;
 `;
 
 const ButtonContainer = styled.div`
@@ -137,6 +138,7 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
   const carouselRef = useRef(null);
   const windowWidth = useResize();
   const totalContent = CAROUSEL_LIST.length;
+
   const fullWidth =
     imageWidth * totalContent + (totalContent - 1) * carouselGap;
   const lastContentWidth =
@@ -160,7 +162,7 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
     };
   };
 
-  const handleNextContent = () => {
+  const handleNextContent = useCallback(() => {
     if (isLoading) return;
     handleLoading();
     return activeContent >= totalContent - 2
@@ -169,9 +171,16 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
           (prevLocation) => (prevLocation += imageWidth + carouselGap),
         ),
         setActiveContent((prevContent) => prevContent + 1));
-  };
+  }, [
+    imageWidth,
+    carouselGap,
+    activeContent,
+    totalContent,
+    initialLocation,
+    isLoading,
+  ]);
 
-  const handlePrevContent = () => {
+  const handlePrevContent = useCallback(() => {
     if (isLoading) return;
     handleLoading();
     return activeContent > 1
@@ -181,7 +190,14 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
         setActiveContent((prevContent) => prevContent - 1))
       : (setCurrentLocation(lastContentWidth),
         setActiveContent(totalContent - 2));
-  };
+  }, [
+    imageWidth,
+    carouselGap,
+    totalContent,
+    activeContent,
+    lastContentWidth,
+    isLoading,
+  ]);
 
   const [run] = useIntervalFn(() => {
     handleNextContent();
@@ -202,6 +218,45 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
       setCurrentLocation(initialLocation);
     }
   }, [imageWidth, carouselGap, initialLocation]);
+
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const [isDrag, setIsDrag] = useState(false);
+
+  const handleTouchStart = useCallback((e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+    setTouchEnd(e.targetTouches[0].clientX);
+    setIsDrag(true);
+  }, []);
+
+  const handleMouseDown = useCallback((e) => {
+    setTouchStart(e.clientX);
+    setTouchEnd(e.clientX);
+    setIsDrag(true);
+  }, []);
+
+  const handleTouchMove = useCallback(
+    (e) => {
+      isDrag && setTouchEnd(e.targetTouches[0].clientX);
+    },
+    [isDrag],
+  );
+
+  const handleMouseMove = useCallback(
+    (e) => {
+      isDrag && setTouchEnd(e.clientX);
+    },
+    [isDrag],
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    setIsDrag(false);
+    if (touchStart - touchEnd > imageWidth / 4) handleNextContent();
+    if (touchStart - touchEnd < -(imageWidth / 4)) handlePrevContent();
+
+    setTouchStart(null);
+    setTouchEnd(null);
+  }, [touchStart, touchEnd, imageWidth, handleNextContent, handlePrevContent]);
 
   const handleCarouselList = (list) =>
     list.map(({ src, alt, title, subtitle }, index) => (
@@ -228,6 +283,12 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
         gap={carouselGap}
         ref={carouselRef}
         width={fullWidth}
+        onTouchStart={(touchStartEvent) => handleTouchStart(touchStartEvent)}
+        onTouchMove={(touchMoveEvent) => handleTouchMove(touchMoveEvent)}
+        onTouchEnd={(touchEndEvent) => handleTouchEnd(touchEndEvent)}
+        onMouseDown={(mouseDownEvent) => handleMouseDown(mouseDownEvent)}
+        onMouseMove={(mouseMoveEvent) => handleMouseMove(mouseMoveEvent)}
+        onMouseUp={handleTouchEnd}
         style={{ ...initialStyle }}
       >
         {handleCarouselList(CAROUSEL_LIST)}
