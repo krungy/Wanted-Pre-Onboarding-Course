@@ -41,8 +41,6 @@ const NotificationSvgButton = styled(ButtonContainer)`
     position: absolute;
     top: 0;
     right: -4px;
-    width: 12px;
-    height: 12px;
   }
 `;
 
