@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import color from '@assets/colors';
 import { Icon, Image, TextButton, Button, Avatar } from '@components/base';
 import { Logo } from '@assets/Image';
-import PropTypes from 'prop-types';
+import theme from '@styles/theme';
 
 const MENU_LIST = [
   {
@@ -52,6 +53,26 @@ const SIDEMENU_LIST = [
     type: 'Avatar',
     status: 'New',
   },
+  {
+    name: 'bi:three-dots',
+    type: 'Icon',
+    status: 'default',
+  },
+];
+
+const SMALL_THEME_MENU_LIST = [
+  {
+    title: '홈',
+    status: 'Focus',
+  },
+  {
+    title: '채용',
+    status: 'Default',
+  },
+  {
+    title: '이벤트',
+    status: 'Default',
+  },
 ];
 
 const NavigationContainer = styled.header`
@@ -59,21 +80,51 @@ const NavigationContainer = styled.header`
   z-index: 5;
   top: 0;
   left: 0;
-  width: ${({ width }) => width}px;
+  width: 1060px;
   height: 50px;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 0;
   align-items: center;
+  margin: 0 8px;
   padding: 0;
   background-color: ${color.white};
   box-sizing: border-box;
+  flex-wrap: wrap;
+
+  ${theme.mediaQuery('medium')} {
+    height: 110px;
+  }
 `;
 
 const NavigationContent = styled.div`
   display: flex;
-  width: 100%;
   margin: 0;
-  justify-content: ${({ align }) => align};
   align-items: center;
+  box-sizing: border-box;
+  // 기본 상태에서는 three-dot 아이콘 숨기기
+  > div :nth-child(4) {
+    display: none;
+  }
+
+  ${theme.mediaQuery('medium')} {
+    width: ${({ align }) => align === 'left' && '100%'};
+    padding: ${({ align }) => (align === 'left' ? '15px 20px' : '0 20px')};
+    gap: ${({ align }) => align === 'right' && '4px'};
+    ${({ align }) =>
+      align === 'right' &&
+      css`
+        gap: '4px';
+        // Divider, Avatar, Button 숨기고 three-dot 컴포넌트 보여주기
+        > hr,
+        > div :nth-child(3),
+        > button {
+          display: none;
+        }
+        > div :nth-child(4) {
+          display: block;
+        }
+      `}
+  }
 `;
 
 const DefaultNavigation = ({
@@ -84,11 +135,9 @@ const DefaultNavigation = ({
 }) => {
   return (
     <NavigationContainer {...props}>
-      <NavigationContent align="left" style={{ width: '60%' }}>
-        {leftComponent}
-      </NavigationContent>
+      <NavigationContent align="left">{leftComponent}</NavigationContent>
       <NavigationContent align="center">{centerComponent}</NavigationContent>
-      <NavigationContent align="flex-end">{rightComponent}</NavigationContent>
+      <NavigationContent align="right">{rightComponent}</NavigationContent>
     </NavigationContainer>
   );
 };
@@ -97,9 +146,12 @@ export default DefaultNavigation;
 
 const MenuContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
+
+  ${theme.mediaQuery('large')} {
+    gap: 8px;
+  }
 `;
 
 const GlobalNavigationWrapper = styled.div`
@@ -118,9 +170,25 @@ const Divider = styled.hr`
   width: 1px;
   height: 13px;
   vertical-align: middle;
+
+  ${theme.mediaQuery('large')} {
+    margin: 0 14px;
+  }
 `;
 
-export const GlobalNavigationBar = ({ width }) => {
+const DefaultWidthMenu = styled.div`
+  ${theme.mediaQuery('small')} {
+    display: none;
+  }
+`;
+
+const SmallWidthMenu = styled.div`
+  ${theme.mediaQuery('small', 'min')} {
+    display: none;
+  }
+`;
+
+export const GlobalNavigationBar = () => {
   const handleMenuList = (list) =>
     list.map(({ title, status }, index) => (
       <TextButton
@@ -146,11 +214,27 @@ export const GlobalNavigationBar = ({ width }) => {
         </Button>
       ),
     );
+
+  const handleSmallThemeMenuList = (list) =>
+    list.map(({ title, status }, index) => (
+      <TextButton
+        border={false}
+        color={color.black}
+        key={index}
+        style={{
+          fontSize: 14,
+          borderBottom: status === 'Focus' && `1px solid ${color.blue}`,
+        }}
+      >
+        {title}
+      </TextButton>
+    ));
+
   return (
     <GlobalNavigationWrapper>
       <DefaultNavigation
         leftComponent={
-          <MenuContainer>
+          <MenuContainer style={{ gap: 0 }}>
             <Button>
               <Icon name="mi:menu" color="#000" height="24px" />
             </Button>
@@ -160,33 +244,29 @@ export const GlobalNavigationBar = ({ width }) => {
                 alt="Logo"
                 width="74.38px"
                 height="20px"
-                style={{ marginBottom: 5 }}
+                style={{ margin: '0 0 5px 5px' }}
               />
             </Button>
           </MenuContainer>
         }
-        centerComponent={handleMenuList(MENU_LIST)}
+        centerComponent={
+          <>
+            <DefaultWidthMenu>{handleMenuList(MENU_LIST)}</DefaultWidthMenu>
+            <SmallWidthMenu>
+              {handleSmallThemeMenuList(SMALL_THEME_MENU_LIST)}
+            </SmallWidthMenu>
+          </>
+        }
         rightComponent={
           <>
-            <MenuContainer style={{ gap: 14 }}>
-              {handleSideMenuList(SIDEMENU_LIST)}
-            </MenuContainer>
+            <MenuContainer>{handleSideMenuList(SIDEMENU_LIST)}</MenuContainer>
             <Divider />
             <TextButton border={true} color={color.black_70}>
               기업 서비스
             </TextButton>
           </>
         }
-        width={width}
       />
     </GlobalNavigationWrapper>
   );
-};
-
-GlobalNavigationBar.propTypes = {
-  width: PropTypes.number,
-};
-
-GlobalNavigationBar.defaultProps = {
-  width: 1060,
 };
