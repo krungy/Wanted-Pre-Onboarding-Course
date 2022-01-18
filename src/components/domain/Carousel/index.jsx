@@ -18,6 +18,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import color from '@assets/colors';
 import { useResize, useIntervalFn } from '@hooks';
 import PropTypes from 'prop-types';
+import theme from '@styles/theme';
 
 const CAROUSEL_LIST = [
   {
@@ -118,6 +119,14 @@ const ButtonContainer = styled.div`
   opacity: 0.5;
   width: 30px;
   height: 60px;
+  left: ${({ align }) => align === 'left' && `calc((100% - 1210px) / 2)`};
+  right: ${({ align }) => align === 'right' && `calc((100% - 1210px) / 2)`};
+
+  ${theme.mediaQuery('large')} {
+    top: 150px;
+    left: ${({ align }) => align === 'left' && '4px'};
+    right: ${({ align }) => align === 'right' && '4px'};
+  }
 `;
 
 const Carousel = ({ carouselGap, imageWidth, ...props }) => {
@@ -125,9 +134,6 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
   const initialLocation = imageWidth + carouselGap;
   const [currentLocation, setCurrentLocation] = useState(initialLocation);
   const [isLoading, setIsLoading] = useState(false);
-  // const [cursorPointX, setCursorPointX] = useState(null);
-  // const [isDrag, setIsDrag] = useState(false);
-
   const carouselRef = useRef(null);
   const windowWidth = useResize();
   const totalContent = CAROUSEL_LIST.length;
@@ -186,6 +192,17 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
     run();
   }, [moveCarousel, run]);
 
+  // 반응형에 따른 캐러셀 컨텐츠 위치 작업
+  useEffect(() => {
+    if (imageWidth < 1060) {
+      setActiveContent(1);
+      setCurrentLocation(imageWidth + carouselGap);
+    } else {
+      setActiveContent(1);
+      setCurrentLocation(initialLocation);
+    }
+  }, [imageWidth, carouselGap, initialLocation]);
+
   const handleCarouselList = (list) =>
     list.map(({ src, alt, title, subtitle }, index) => (
       <CarouselContent
@@ -200,7 +217,8 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
     ));
 
   const initialStyle = {
-    paddingLeft: Math.ceil(windowWidth / 2 - imageWidth / 2),
+    paddingLeft:
+      imageWidth === 1060 ? Math.ceil(windowWidth / 2 - imageWidth / 2) : 0,
     boxSizing: 'content-box',
   };
 
@@ -214,12 +232,12 @@ const Carousel = ({ carouselGap, imageWidth, ...props }) => {
       >
         {handleCarouselList(CAROUSEL_LIST)}
       </ContentContainer>
-      <ButtonContainer style={{ left: `calc((100% - 1210px) / 2)` }}>
+      <ButtonContainer align="left">
         <Button onClick={handlePrevContent}>
           <Icon name="bi:chevron-left" height={16} />
         </Button>
       </ButtonContainer>
-      <ButtonContainer style={{ right: `calc((100% - 1210px) / 2)` }}>
+      <ButtonContainer align="right">
         <Button onClick={handleNextContent}>
           <Icon name="bi:chevron-right" height={16} />
         </Button>

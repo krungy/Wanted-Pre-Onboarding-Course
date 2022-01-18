@@ -9,6 +9,7 @@ const InformationContainer = styled.div`
   box-sizing: border-box;
   border-radius: 4px;
   background-color: ${color.white};
+  position: relative;
 `;
 
 const Title = styled.h2`
@@ -39,8 +40,10 @@ const Information = ({ title, subtitle, ...props }) => {
         color={color.blue}
         style={{
           padding: 0,
-          margin: '14px 0 0 20px',
           fontWeight: 600,
+          position: 'absolute',
+          left: '20px',
+          bottom: '-22px',
         }}
       >
         바로가기

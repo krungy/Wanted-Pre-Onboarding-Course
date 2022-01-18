@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Image, Information } from '@components/base';
 import PropTypes from 'prop-types';
+import theme from '@styles/theme';
 
 const CarouselContentContainer = styled.div`
   position: relative;
@@ -10,6 +11,7 @@ const CarouselContentContainer = styled.div`
   height: 300px;
   border-radius: 4px;
   overflow: hidden;
+  // Dim 처리
   &::after {
     display: ${({ isActive }) => (isActive ? 'none' : 'block')};
     position: absolute;
@@ -17,14 +19,41 @@ const CarouselContentContainer = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
+    border-radius: 4px;
     content: '';
     background: rgba(0, 0, 0, 0.4);
+
+    ${theme.mediaQuery('large')} {
+      height: 183px;
+    }
   }
+  // Image 컴포넌트
+  > img {
+    ${theme.mediaQuery('large')} {
+      height: 183px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+  }
+  // Information 컴포넌트
   > div {
     display: ${({ isActive }) => (isActive ? 'block' : 'none')};
     position: absolute;
     left: 24px;
     bottom: 28px;
+
+    ${theme.mediaQuery('large')} {
+      position: static;
+      width: 100%;
+      height: 79px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      > button {
+        left: -46px;
+      }
+    }
   }
 `;
 
